@@ -1,0 +1,15 @@
+on post-fs-data
+    chmod 0777 /sys/devices/platform/otg_iddig/usbhost
+    chown system radio /sys/devices/platform/otg_iddig/usbhost
+on boot
+service dhcpcd_eth0 /system/bin/dhcpcd -ABDKL
+    class main
+    disabled
+    oneshot
+
+
+# IP Renew # # eth0
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
